@@ -173,6 +173,7 @@ DOUBLEPRECISION=1                             # if activated and set to 1, use d
 #ADDITIONAL_GRID			      # adds additional particles to the IC read by a restart run, used in hybrid neutrino simulations
 #THERMAL_VEL_IC				      # adds a random thermal velocity to IC particles
 #CB_PHASE				      # use the phase from the restart snapshot to initialise the density field instead of the random seed
+#MFLR_RST				      # read in multifluid perturbations from file rather than initialise from linear theory
 #GENERATE_GAS_IN_ICS                          # add SPH particles to created or read dark matter only ICs
 #SPLIT_PARTICLE_TYPE=4+8                      # specifies particle types to be split if GENERATE_GAS_IN_ICS is activated
 #NGENIC_FIX_MODE_AMPLITUDES                   # when activated, this leaves the mode amplitudes at sqrt(P(k)), instead of sampling from a Rayleigh distribution

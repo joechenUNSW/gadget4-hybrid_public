@@ -195,8 +195,11 @@ void global_data_all_processes::register_parameters(void)
   add_param("Seed", &NgenicSeed, PARAM_INT, PARAM_FIXED);
 #endif
 
-#ifdef ADDITIONAL_GRID
+#ifdef MFLR_RST
   add_param("ynuFile", ynuFile, PARAM_STRING, PARAM_FIXED);
+#endif
+
+#ifdef ADDITIONAL_GRID
   add_param("N_tau_part", &N_tau_part, PARAM_INT, PARAM_FIXED);
   add_param("Nu_part_deg", &Nu_part_deg, PARAM_INT, PARAM_FIXED);
 #endif

@@ -43,11 +43,14 @@
 #    SUBFIND_STORE_LOCAL_DENSITY
 
 #Hybrid settings
-    NGENIC=1024
+#    NGENIC=1024
 # turn on these if running Hybrid
-    ADDITIONAL_GRID
-    THERMAL_VEL_IC
-    CB_PHASE
+#    ADDITIONAL_GRID
+#    THERMAL_VEL_IC
+#    CB_PHASE
+
+    MFLR_RST
+
 # turn on this if running Linear response
 #    CREATE_GRID
 

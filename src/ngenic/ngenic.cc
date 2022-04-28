@@ -1213,6 +1213,7 @@ void ngenic::ngenic_setup_modes_in_kspace(fft_complex *fft_of_grid, fft_complex 
     }
 }
 
+#ifdef ADDITIONAL_GRID
 void ngenic::ngenic_readout_mass(fft_real *grid)
 {
 #ifdef FFT_COLUMN_BASED
@@ -1222,25 +1223,20 @@ void ngenic::ngenic_readout_mass(fft_real *grid)
   int tasklastsection = NTask - exc;
   int pivotcol        = tasklastsection * avg;
 #endif
- 
+
   long long gridSize    = All.GridSize;
   long long partTotal   = gridSize * gridSize * gridSize;
   long long partPerTask = partTotal / NTask;
 
   double masstot = 0;
 
-#ifdef ADDITIONAL_GRID 
   if(All.N_tau_part > 0)
     {
       masstot = (All.OmegaNuPart / All.N_tau_part) * 3 * All.Hubble * All.Hubble / (8 * M_PI * All.G) * All.BoxSize * All.BoxSize * All.BoxSize;
-      //masstot = (All.OmegaNuPart / (All.N_tau_part * All.Nu_part_deg)) * 3 * All.Hubble * All.Hubble / (8 * M_PI * All.G) * All.BoxSize * All.BoxSize * All.BoxSize;
     } else {
       mpi_printf("no particle neutrinos are present\n");
       masstot = 0;
     }
-#else
-  masstot = All.OmegaNuPart * 3 * All.Hubble * All.Hubble / (8 * M_PI * All.G) * All.BoxSize * All.BoxSize * All.BoxSize;
-#endif
 
   double m = masstot / (partTotal);
 
@@ -1350,10 +1346,8 @@ void ngenic::ngenic_readout_mass(fft_real *grid)
 
     int i_start = 0;
 
-#ifdef ADDITIONAL_GRID
     i_start = Sp->NumICPart;
     mpi_printf("skipped %d IC particles\n", i_start);
-#endif
 
     for(int i = i_start; i < Sp->NumPart; i++)
       {
@@ -1426,6 +1420,7 @@ void ngenic::ngenic_readout_mass(fft_real *grid)
   Mem.myfree(flistin);
 
 }
+#endif
 
 void ngenic::ngenic_readout_disp(fft_real *grid, int axis, double pfac, double vfac, int vel_option)
 {

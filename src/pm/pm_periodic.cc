@@ -2540,7 +2540,8 @@ if (All.NLR == 2) {
   if(All.Time == All.TimeBegin && Nulinear.initialisation_switch == 1) {
     mpi_printf("NEUTRINOS: Begin multi-fluid initialisation\n");
 
-#ifndef ADDITIONAL_GRID
+#ifndef MFLR_RST
+//#ifndef ADDITIONAL_GRID
     // work out how much each process has to do
     int local_n_k = 0;
     if(PMGRID % NTask == 0) {

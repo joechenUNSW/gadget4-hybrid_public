@@ -1279,6 +1279,12 @@ blah
 
 -------
 
+**MFLR_RST**
+
+blah
+
+-------
+
 **GENERATE_GAS_IN_ICS**
 
 This option can be used to modify dark matter-only initial conditions
