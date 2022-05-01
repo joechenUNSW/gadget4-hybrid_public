@@ -121,7 +121,7 @@ double nulinear::Hc2_Hc02_eta(double eta) {
     double sum_OEc = All.Omega0/aeta + Omega_rel_0/aeta2 + All.OmegaLambda*Ec_de;
     
     //neutrinos
-    if(All.OmegaNuLin != 0) {
+    if(All.OmegaNuLin != 0 || All.OmegaNuPart != 0) {
       for(int t=0; t<N_tau; t++) sum_OEc += Omega_nu_t_0 * Nulinear.Ec_t_eta_REL(t,eta);
     }
 
