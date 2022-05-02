@@ -3919,7 +3919,8 @@ void pm_periodic::pmforce_measure_powerspec(int flag, int *typeflag)
   MPI_Allreduce(MPI_IN_PLACE, CountModes, BINS_PS, MPI_LONG_LONG, MPI_SUM, Communicator);
   MPI_Allreduce(MPI_IN_PLACE, KWeightSum, BINS_PS, MPI_DOUBLE, MPI_SUM, Communicator);
 
-  MPI_Allreduce(MPI_IN_PLACE, &Dgrid_counter, 1, MPI_LONG, MPI_SUM, Communicator);
+  long int Dgrid_counter_global = 0;
+  MPI_Allreduce(&Dgrid_counter, &Dgrid_counter_global, 1, MPI_LONG, MPI_SUM, Communicator);
 
 #ifdef CB_VELDIV
   MPI_Allreduce(MPI_IN_PLACE, SumThetaUncorrected, BINS_PS, MPI_DOUBLE, MPI_SUM, Communicator);
@@ -3983,11 +3984,13 @@ void pm_periodic::pmforce_measure_powerspec(int flag, int *typeflag)
                 }
 
 	      /* first thing to write in the file is the total expected size of the phase information */
-              long int maxfftglobalsize = Dgrid_counter;
-              printf("maxfftglobalsize = %ld\n", maxfftglobalsize);
+              long int maxfftglobalsize = Dgrid_counter_global;
+              //printf("maxfftglobalsize = %ld\n", maxfftglobalsize);
               fwrite(&maxfftglobalsize, sizeof(long int), 1, fdgrid);
 
-              fwrite(Dgrid_local, sizeof(fft_real), maxfftsize, fdgrid);
+              //printf("Dgrid_counter = %ld on Task %d\n", Dgrid_counter, ThisTask);
+              fwrite(Dgrid_local, sizeof(fft_real), Dgrid_counter, fdgrid);
+              //fwrite(Dgrid_local, sizeof(fft_real), maxfftsize, fdgrid);
 
               fclose(fdgrid);
             }
@@ -4008,7 +4011,9 @@ void pm_periodic::pmforce_measure_powerspec(int flag, int *typeflag)
                       Terminate("can't open file '%s' on task %d\n", delta_grid_fname, ThisTask);
                     }
 
-                  fwrite(Dgrid_local, sizeof(fft_real), maxfftsize, fdgrid);
+                  printf("Dgrid_counter = %ld on Task %d\n", Dgrid_counter, ThisTask);
+                  fwrite(Dgrid_local, sizeof(fft_real), Dgrid_counter, fdgrid);
+                  //fwrite(Dgrid_local, sizeof(fft_real), maxfftsize, fdgrid);
 
                   fclose(fdgrid);
                 }

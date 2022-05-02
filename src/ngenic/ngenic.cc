@@ -176,6 +176,7 @@ void ngenic::ngenic_displace_particles(void)
   long int maxfftglobalsize;
   fread(&maxfftglobalsize, sizeof(long int), 1, fdgrid);
 
+  maxfftglobalsize += 2;
   /* now try figure out how much data each process needs to read from the file */
   /* the idea is that nslab_y / PMGRID tells you how big of a slab this particular process is responsible for */
   /* each process is only reading the phase info of its local slab */
@@ -185,11 +186,12 @@ void ngenic::ngenic_displace_particles(void)
   fft_real *deltagrid_local;
   deltagrid_local = (fft_real *)Mem.mymalloc_movable_clear(&deltagrid_local, "deltagrid_local", local_size_to_read * sizeof(fft_real));
 
+  //printf("local_size_to_read = %ld on Task %d\n", local_size_to_read, ThisTask);
   /* set the location in the file to start reading */
   /* this indexes from the slabstart_y to ensure the correct spot is found even when the slab division is not equal */
   long int local_start_point = maxfftglobalsize * myplan.slabstart_y / PMGRID; 
 
-  mpi_printf("maxfftglobalsize = %ld\n", maxfftglobalsize);
+  //mpi_printf("maxfftglobalsize = %ld\n", maxfftglobalsize);
 
   /* fseek sets the file pointer to the spot in the file where the array will start reading from */
   /* important to offset by one long int that is for storing the maxfftglobalsize */
