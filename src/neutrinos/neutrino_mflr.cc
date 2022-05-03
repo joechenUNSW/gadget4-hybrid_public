@@ -241,7 +241,11 @@ double nulinear::d_nu_mono(double z, const double *y) {
     }
 */
 
-    return d_mono / norm;
+    if(norm > 0) {
+      return d_mono / norm;
+    } else {
+      return 0;
+    }
 }
 
 // neutrino monopole of individual streams
