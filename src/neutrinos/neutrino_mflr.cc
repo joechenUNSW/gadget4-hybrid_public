@@ -171,19 +171,21 @@ double nulinear::Poisson(double eta, double k, const double *y) {
 // this is the default setting, where the neutrino flows are converted from the slowest to fastest. The flows are therefore excluded from tau = 0.
 // // if however one wishes to exclude specific neutrino flows from the middle of the distribution (for convergence tests for example), then comment 
 // out the follow section of the code until the comment-line 'end-of-block'.
+
     int t_min = 0;
 #ifdef ADDITIONAL_GRID
     t_min = All.N_tau_part * All.Nu_part_deg;
 #endif
     for(int t=t_min; t<N_tau; t++) sum_Od += Nulinear.OF_eta(t,eta) * y[2*t*N_mu];
+
 // end-of-block
 
 // in the case of the above block of code being commented out, i.e. you wish to exclude specific neutrino flows, uncomment the following block of code. 
 // // The two integers t_ex_start and t_ex_finish are the neutrino flow numbers you wish to exclude (i.e. converted to particles). The flows excluded are inclusive of the start and finish numbers. 
 // // Note: the flow numbers are the 'real' number labels that start from tau=1 to tau_max, and not the c-index that is offsetted (i.e. start from tau=0).
 /*
-    int t_ex_start = 10;
-    int t_ex_finish = 13;
+    int t_ex_start = 3;
+    int t_ex_finish = 4;
 
     for(int t=0; t<t_ex_start-1; t++) {
       sum_Od += Nulinear.OF_eta(t,eta) * y[2*t*N_mu];
@@ -209,6 +211,7 @@ double nulinear::d_nu_mono(double z, const double *y) {
 
 // this is the default setting, where the neutrino flows are converted from the slowest to fastest. The flows are therefore excluded from tau = 0.
 // if however one wishes to exclude specific neutrino flows from the middle of the distribution (for convergence tests for example), then comment out the follow section of the code until the comment-line 'end-of-block'.
+
     int t_min = 0;
 #ifdef ADDITIONAL_GRID
     t_min = All.N_tau_part * All.Nu_part_deg;
@@ -218,15 +221,15 @@ double nulinear::d_nu_mono(double z, const double *y) {
       d_mono += y[2*t*N_mu] * E_m;
       norm += E_m;
     }
+
 // end-of-block
 
 // in the case of the above block of code being commented out, i.e. you wish to exclude specific neutrino flows, uncomment the following block of code. 
 // The two integers t_ex_start and t_ex_finish are the neutrino flow numbers you wish to exclude (i.e. converted to particles). The flows excluded are inclusive of the start and finish numbers. 
 // Note: the flow numbers are the 'real' number labels that start from tau=1 to tau_max, and not the c-index that is offsetted (i.e. start from tau=0).
-
 /*
-    int t_ex_start = 10;
-    int t_ex_finish = 13;
+    int t_ex_start = 3;
+    int t_ex_finish = 3;
 
     for(int t=0; t<t_ex_start-1; t++) {
       double E_m = 1.0;

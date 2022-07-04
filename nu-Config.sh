@@ -11,7 +11,7 @@
 
     PMGRID=1024
     #TREEPM_NOTIMESPLIT
-    #ASMTH=2.0
+    #ASMTH=0.01
     MULTIPOLE_ORDER=1     # multipole order for the tree force expansion. Stock is 2, best to set it to 1.
 #    TREE_NUM_BEFORE_NODESPLIT=6
     
