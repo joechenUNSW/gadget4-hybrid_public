@@ -85,6 +85,8 @@ void ngenic::ngenic_displace_particles(void)
   if(All.NLR > 0) {
     mpi_printf("NGENIC: scale-dependent growth used.\n");
     vel_prefac1 /= ngenic_f1_omega(All.cf_atime);
+  } else {
+    vel_prefac1 /= ngenic_f1_omega(All.cf_atime);
   }
 
   vel_prefac1 /= sqrt(All.cf_atime); /* converts to Gadget velocity */
