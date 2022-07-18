@@ -11,7 +11,7 @@ public:
     const double N_nu_eff = 3.044;
     const double N_nu_massive = 3.044;
     static const int N_tau = 20; // sets the number of neutrino fluids 
-    static const int N_mu = 20; // sets the highest legendre moment
+    static const int N_mu = 0; // sets the highest legendre moment
 
 #define N_nu_tot (2*N_tau*N_mu)
 #define N_EQ (2*N_tau*N_mu+2)

@@ -2908,6 +2908,20 @@ if (All.NLR == 2) {
                 assert(bin_index_pm < PMGRID);
               }
 
+              double dk, u_k;
+
+              if(bin_index_pm != PMGRID-1) {
+                dk = k_nuGadget[bin_index_pm+1] - k_nuGadget[bin_index_pm];
+              } else {
+                dk = 0;
+              }
+
+              if(dk != 0) {
+                u_k = (sqrt(k2) - k_nuGadget[bin_index_pm])/dk;
+              } else {
+                u_k = 0;
+              }
+
               smth = -exp(-k2 * asmth2) / k2;
 
               /* do deconvolution */
@@ -2934,7 +2948,16 @@ if (All.NLR == 2) {
               deconv    = ff * ff * ff * ff;
 
               if(All.NLR == 2) { // multi-fluid neutrino linear response
-                smth *= phi_adj_fac[bin_index_pm];
+
+                double phi_adj_interp;
+
+                if(bin_index_pm != PMGRID-1) {
+                  phi_adj_interp = ( (1. - u_k) * phi_adj_fac[bin_index_pm] + u_k * phi_adj_fac[bin_index_pm+1] );
+                } else {
+                  phi_adj_interp = phi_adj_fac[bin_index_pm];
+                }
+
+                smth *= phi_adj_interp;
               }
               
               if(All.NLR == 1) { // SuperEasy neutrino linear response

@@ -1,7 +1,7 @@
 
 # Basic code operation
 
-#    LEAN     # if turned on, all particles of the same type are assumed to be of the same mass.
+    LEAN     # if turned on, all particles of the same type are assumed to be of the same mass.
 
     PERIODIC
     SELFGRAVITY
@@ -17,8 +17,8 @@
     
 # Softening types and particle types
 
-    NSOFTCLASSES=6            # set to maximum number of type you expect to use
-    NTYPES=6
+    NSOFTCLASSES=2            # set to maximum number of type you expect to use
+    NTYPES=2
 
 # Floating point accuracy
 
