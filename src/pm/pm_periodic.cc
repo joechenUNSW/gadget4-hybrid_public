@@ -80,7 +80,7 @@
 #ifndef FFT_COLUMN_BASED
 #define NI(x, y, z) (((large_array_offset)GRIDZ) * ((y) + (x)*myplan.nslab_y) + (z))
 #endif
-/* test */
+
 /*! \brief This routine generates the FFTW-plans to carry out the FFTs later on.
  *
  *  Some auxiliary variables for bookkeeping are also initialized.
