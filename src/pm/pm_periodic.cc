@@ -2947,10 +2947,9 @@ void pm_periodic::pmforce_periodic(int mode, int *typelist)
           if(k2 > 0)
             {
               int bin_index_pm;
-              if(All.NLR == 2) {
-                bin_index_pm = floor(binsperunit*log(sqrt(k2)*All.BoxSize/(2.*M_PI)));
-                assert(bin_index_pm < PMGRID);
-              }
+
+              bin_index_pm = floor(binsperunit*log(sqrt(k2)*All.BoxSize/(2.*M_PI)));
+              assert(bin_index_pm < PMGRID);
 
               double dk, u_k;
 
